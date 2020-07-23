@@ -1,0 +1,38 @@
+{
+    "manifest_version": 2,
+    "name": "Link preview",
+    "description": "Show the content of a link when hovered over it.",
+    "version": "1.0",
+    "homepage_url": "https://jhamadhav.com/anchor-view",
+    "icons": {
+        "32": "icons/anchor-32.png"
+    },
+    "permissions": [
+        "activeTab"
+    ],
+    "browser_action": {
+        "default_icon": "icons/link-32.png",
+        "theme_icons": [
+            {
+                "light": "icons/link-32.png",
+                "dark": "icons/link-32.png",
+                "size": 32
+            }
+        ],
+        "default_title": "Link preview",
+        "default_popup": "popup/choose_anchor.html"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "css": [
+                "./styles/main.min.css"
+            ],
+            "js": [
+                "content-script.js"
+            ]
+        }
+    ]
+}
