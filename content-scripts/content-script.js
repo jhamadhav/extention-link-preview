@@ -98,6 +98,7 @@ const place_tool = (x, y, yoff = 10) => {
     }
     // tool_shape.x = tt_x;
     // tool_shape.y = tt_y
+    // tt.style.transform = `translate(${tt_x}px,${tt_y}px);`;
     tt.style.left = `${tt_x}px`;
     tt.style.top = `${tt_y}px`;
 }
@@ -116,8 +117,8 @@ const show = (e) => {
     if (url !== undefined) {
         // console.log("url");
         tool.style.opacity = "1";
+        get_data(url);
         place_tool(x, y);
-        send_url(url);
     } else {
         tool.style.opacity = "0";
         place_tool(x, y, 40);
@@ -126,8 +127,3 @@ const show = (e) => {
 
 // get document and add a event listener
 document.addEventListener("mouseover", show);
-
-// send url
-const send_url = (url) => {
-    console.log(url);
-}

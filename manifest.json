@@ -8,7 +8,9 @@
         "32": "icons/anchor-32.png"
     },
     "permissions": [
-        "activeTab"
+        "activeTab",
+        "<all_urls>",
+        "webRequest"
     ],
     "browser_action": {
         "default_icon": "icons/link-32.png",
@@ -31,6 +33,7 @@
                 "content-styles/main.min.css"
             ],
             "js": [
+                "content-scripts/url.js",
                 "content-scripts/content-script.js"
             ]
         }
