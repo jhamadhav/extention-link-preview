@@ -1,6 +1,10 @@
 // check if the extension works
 console.log("successfully injected a code");
 
+// global variables
+const H = window.innerHeight;
+const W = window.innerWidth;
+
 // creation of the tool tip
 const create_tool = () => {
 
@@ -53,8 +57,11 @@ const create_tool = () => {
     document.body.appendChild(tooltip);
 }
 
+// create the tooltip
+create_tool();
+
 // function to place tooltip
-const place_tool = () => {
+const place_tool = (x, y, yoff = 10) => {
     //get the tool tip
     let tt = document.getElementsByClassName("tooltip")[0];
 
@@ -80,49 +87,47 @@ const place_tool = () => {
         }
     }
     // for Y co-ordinate
-    if (H - y > tool_h) {
-        tt_y = y;
+    if (H - y + yoff >= tool_h) {
+        tt_y = y + yoff;
     } else {
-        if (y >= tool_h) {
-            tt_y = y - tool_h;
+        if (y - yoff >= tool_h) {
+            tt_y = y - tool_h - yoff;
         } else {
             tt_y = 0;
         }
     }
     // tool_shape.x = tt_x;
     // tool_shape.y = tt_y
-    tt.style.transform = "translate(" + tt_x + "px," + tt_y + "px)";
+    tt.style.left = `${tt_x}px`;
+    tt.style.top = `${tt_y}px`;
 }
 
-// create the tooltip
-create_tool();
-
-// get all anchor tags and add a event listener so the the link that they point to is console logged
-const set_event = () => {
-    for (let i = 0; i < a.length; i++) {
-        a[i].addEventListener("mouseover", show);
-        a[i].addEventListener("mouseout", () => {
-            let tool = document.getElementsByClassName("tooltip")[0];
-            // tool.style.visibility = "hidden";
-        });
-    }
-}
-set_event();
-
-// the anchor tag and function to show it
-let a = document.getElementsByTagName("a");
 // show function
 const show = (e) => {
+    let tool = document.getElementsByClassName("tooltip")[0];
 
-    // for this instance alone place tooltip every time mouse move
-    place_tool();
+    let x = e.clientX;
+    let y = e.clientY;
 
     // the url from anchor tab
-    let url = e.target.href;
-    console.log(e);
-    // tool.style.visibility = "visible";
+    let url = e.target.parentNode.href || e.target.href;
+    // console.log(url);
 
+    if (url !== undefined) {
+        // console.log("url");
+        tool.style.opacity = "1";
+        place_tool(x, y);
+        send_url(url);
+    } else {
+        tool.style.opacity = "0";
+        place_tool(x, y, 40);
+    }
 }
 
+// get document and add a event listener
+document.addEventListener("mouseover", show);
 
-
+// send url
+const send_url = (url) => {
+    console.log(url);
+}

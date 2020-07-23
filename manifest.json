@@ -28,10 +28,10 @@
                 "<all_urls>"
             ],
             "css": [
-                "./styles/main.min.css"
+                "content-styles/main.min.css"
             ],
             "js": [
-                "content-script.js"
+                "content-scripts/content-script.js"
             ]
         }
     ]

@@ -8,20 +8,26 @@
 
 .tooltip {
     display: flex;
-    position: absolute;
+    position: fixed;
+    top: 0;
+    left: 0;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 12px 18px 16px 18px;
     margin: auto;
-    border: 2px solid #2f2e41;
-    border-radius: 10px;
+    // border: 2px solid #2f2e41;
+    // border-radius: 10px;
     cursor: pointer;
     background-color: white;
     font-family: 'Poppins', sans-serif;
     color: black;
     transition-duration: 100ms;
     z-index: 9999;
+    // visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 
     @include small {
         flex-direction: column-reverse;
