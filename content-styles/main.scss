@@ -23,7 +23,7 @@
     font-family: 'Poppins', sans-serif;
     color: black;
     transition-duration: 100ms;
-    z-index: 9999;
+    z-index: 999;
     // visibility: hidden;
     opacity: 0;
     pointer-events: none;
@@ -76,8 +76,7 @@
         margin: 2px auto 2px auto;
         overflow: hidden;
 
-        img {
-            display: none;
+        #image {
             width: 100%;
             max-width: 220px;
             border-radius: 10px;

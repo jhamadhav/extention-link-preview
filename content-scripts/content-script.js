@@ -4,6 +4,7 @@ console.log("successfully injected a code");
 // global variables
 const H = window.innerHeight;
 const W = window.innerWidth;
+let x, y;
 
 // creation of the tool tip
 const create_tool = () => {
@@ -62,8 +63,6 @@ create_tool();
 
 // function to place tooltip
 const place_tool = (x, y, yoff = 10) => {
-    // show not found while loading
-    document.getElementById("image").src = "https://raw.githubusercontent.com/jhamadhav/link-preview/master/public/images/dummy.svg";
 
     //get the tool tip
     let tt = document.getElementsByClassName("tooltip")[0];
@@ -110,8 +109,8 @@ const place_tool = (x, y, yoff = 10) => {
 const show = (e) => {
     let tool = document.getElementsByClassName("tooltip")[0];
 
-    let x = e.clientX;
-    let y = e.clientY;
+    x = e.clientX;
+    y = e.clientY;
 
     // the url from anchor tab
     let url = e.target.parentNode.href || e.target.href;
@@ -121,7 +120,7 @@ const show = (e) => {
         // console.log("url");
         tool.style.opacity = "1";
         get_data(url);
-        place_tool(x, y);
+
     } else {
         tool.style.opacity = "0";
         place_tool(x, y);

@@ -6,7 +6,7 @@ let gettingItem = browser.storage.local.get();
 gettingItem.then(onGot, onError);
 
 function onGot(item) {
-    console.log(item);
+    // console.log(item);
     links = item || {};
 }
 
@@ -50,6 +50,11 @@ const get_data = async (url) => {
     title.innerText = "Loading...";
     description.innerText = "Almost there";
     url2.innerText = "Just a sec...!";
+
+    // place tool before loading
+    // show not found while loading
+    document.getElementById("image").src = "https://raw.githubusercontent.com/jhamadhav/link-preview/master/public/images/dummy.svg";
+    place_tool(x, y);
 
     // if it already exists then don't send request to the server
     let t = new Date().getTime();
@@ -98,27 +103,21 @@ const show_preview = async (data) => {
     }
 
     if (obj["description"] !== undefined) {
-        let des = obj["description"];
-        if (des.length > 260) {
-            des = des.substring(0, 260) + "...";
-            description.innerText = des;
-        } else {
-            description.innerText = des;
-        }
-
+        description.innerText = obj["description"];
     } else {
         description.innerText = "Description : not found";
     }
 
     if (obj["image"] !== undefined) {
-        image.style.display = "inline";
         image.src = obj["image"];
     } else {
-        image.style.display = "none";
         image.src = "https://raw.githubusercontent.com/jhamadhav/link-preview/master/public/images/dummy.svg";
     }
 
     url.innerText = obj["url"];
+
+    // place after loading
+    place_tool(x, y);
 
 }
 
