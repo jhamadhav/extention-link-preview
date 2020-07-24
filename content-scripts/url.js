@@ -1,11 +1,26 @@
+// setting up the all storage
 let links = {};
+
+// if data is available in storage 
+let gettingItem = browser.storage.local.get();
+gettingItem.then(onGot, onError);
+
+function onGot(item) {
+    console.log(item);
+    links = item || {};
+}
+
+function onError(error) {
+    console.log(`Error: ${error}`);
+    links = {};
+}
 
 // send url
 const send_url = async (url) => {
 
     // put url in a json 
     let data = { "url": url };
-    console.log(data);
+    // console.log(data);
 
     let options = {
         mode: 'cors',
@@ -50,14 +65,13 @@ const get_data = async (url) => {
         delete links[url];
 
         let data = await send_url(url);
-        console.log(data);
+        // console.log(data);
 
         links[url] = JSON.parse(data);
     }
 
-    // irrespective of the action save the new set of array into the local storage
-    // Store
-    // localStorage.setItem("link_data", JSON.stringify(links));
+    // irrespective of the action save the new set of array into the browser storage
+    browser.storage.local.set(links);
 
     // call function to make changes in the dom elements
     show_preview(links[url]);
@@ -84,13 +98,20 @@ const show_preview = async (data) => {
     }
 
     if (obj["description"] !== undefined) {
-        description.innerText = obj["description"];
+        let des = obj["description"];
+        if (des.length > 260) {
+            des = des.substring(0, 260) + "...";
+            description.innerText = des;
+        } else {
+            description.innerText = des;
+        }
+
     } else {
         description.innerText = "Description : not found";
     }
 
     if (obj["image"] !== undefined) {
-        image.style.display = "inline-block";
+        image.style.display = "inline";
         image.src = obj["image"];
     } else {
         image.style.display = "none";
@@ -100,3 +121,4 @@ const show_preview = async (data) => {
     url.innerText = obj["url"];
 
 }
+

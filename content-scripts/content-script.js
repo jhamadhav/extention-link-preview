@@ -62,6 +62,9 @@ create_tool();
 
 // function to place tooltip
 const place_tool = (x, y, yoff = 10) => {
+    // show not found while loading
+    document.getElementById("image").src = "https://raw.githubusercontent.com/jhamadhav/link-preview/master/public/images/dummy.svg";
+
     //get the tool tip
     let tt = document.getElementsByClassName("tooltip")[0];
 
@@ -87,11 +90,11 @@ const place_tool = (x, y, yoff = 10) => {
         }
     }
     // for Y co-ordinate
-    if (H - y + yoff >= tool_h) {
-        tt_y = y + yoff;
+    if (H - y - yoff >= tool_h) {
+        tt_y = y - yoff;
     } else {
-        if (y - yoff >= tool_h) {
-            tt_y = y - tool_h - yoff;
+        if (y + yoff >= tool_h) {
+            tt_y = y - tool_h + yoff;
         } else {
             tt_y = 0;
         }
@@ -121,7 +124,7 @@ const show = (e) => {
         place_tool(x, y);
     } else {
         tool.style.opacity = "0";
-        place_tool(x, y, 40);
+        place_tool(x, y);
     }
 }
 

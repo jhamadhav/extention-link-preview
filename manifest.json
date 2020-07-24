@@ -10,7 +10,8 @@
     "permissions": [
         "activeTab",
         "<all_urls>",
-        "webRequest"
+        "webRequest",
+        "storage"
     ],
     "browser_action": {
         "default_icon": "icons/link-32.png",
