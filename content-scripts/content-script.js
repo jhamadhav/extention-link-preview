@@ -1,10 +1,15 @@
 // check if the extension works
-console.log("successfully injected a code");
+console.log("Link previewer successfully!");
 
 // global variables
-const H = window.innerHeight;
-const W = window.innerWidth;
+let H = window.innerHeight;
+let W = window.innerWidth;
 let x, y;
+
+window.onresize = () => {
+    H = window.innerHeight;
+    W = window.innerWidth;
+}
 
 // creation of the tool tip
 const create_tool = () => {
@@ -70,7 +75,7 @@ const place_tool = (x, y) => {
     let tt = document.getElementsByClassName("tooltip")[0];
 
     //get its shape
-    let tool_shape = tt.getClientRects()[0];
+    let tool_shape = tt.getBoundingClientRect();
     // console.log(tool_shape);
 
     // then have it height and width
@@ -107,6 +112,7 @@ const place_tool = (x, y) => {
 
 // show function
 const show = (e) => {
+
     let tool = document.getElementsByClassName("tooltip")[0];
 
     x = e.clientX;
@@ -122,7 +128,7 @@ const show = (e) => {
         get_data(url);
 
     } else {
-        let reg = new RegExp("tool-");
+        let reg = new RegExp("tool");
         let condition = reg.test(e.target.classList.toString());
         if (!condition) {
             tool.style.visibility = "hidden";

@@ -36,6 +36,7 @@
     z-index: 999;
     visibility: hidden;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    text-overflow: "...";
 
     @include small {
         flex-direction: column-reverse;
@@ -56,6 +57,7 @@
         flex-direction: column;
         justify-content: space-evenly;
         word-wrap: break-word;
+        text-overflow: "...";
 
         .tool-title {
             font-weight: bolder;

@@ -119,13 +119,19 @@ const show_preview = async (data) => {
         let tt = document.getElementsByClassName("tooltip")[0];
 
         // move the position of image and data as per the image size
-        if (new_img.height < new_img.width) {
+        if (W > 480) {
+            if (new_img.height < new_img.width) {
+                tt.style.flexDirection = "column-reverse";
+                tt.style.maxWidth = "300px";
+            } else {
+                tt.style.flexDirection = "initial";
+                tt.style.maxWidth = "440px";
+            }
+        } else {
             tt.style.flexDirection = "column-reverse";
             tt.style.maxWidth = "300px";
-        } else {
-            tt.style.flexDirection = "initial";
-            tt.style.maxWidth = "440px";
         }
+
         // assign the url
         image.src = new_img.src;
 
