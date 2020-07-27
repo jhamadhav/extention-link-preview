@@ -118,7 +118,7 @@ const show = (e) => {
 
     if (url !== undefined) {
         // console.log("url");
-        tool.style.opacity = "1";
+        tool.style.transform = "scale(1)";
         get_data(url);
 
     } else {

@@ -149,8 +149,9 @@ const show_preview = async (data) => {
 
     let tool_tip = document.getElementsByClassName("tooltip")[0];
     if (obj["url"] !== undefined) {
+
         tool_tip.addEventListener("click", () => {
-            document.location = url;
+            window.open(obj["url"]);
         });
     }
 

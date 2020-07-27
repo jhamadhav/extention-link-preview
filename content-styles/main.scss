@@ -24,7 +24,8 @@
     transition-duration: 100ms;
     z-index: 999;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-    opacity: 0;
+    transform-origin: 0 0;
+    transform: scale(0);
 
     @include small {
         flex-direction: column-reverse;
