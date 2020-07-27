@@ -23,6 +23,7 @@ const create_tool = () => {
 
     // hr
     let hr = document.createElement("hr");
+    hr.classList = "tool-hr";
 
     // description
     let tool_desc = document.createElement("div");
@@ -31,7 +32,7 @@ const create_tool = () => {
 
     // url
     let tool_url = document.createElement("div");
-    tool_url.classList = "tool-url"
+    tool_url.classList = "tool-url";
     tool_url.innerText = "Here comes the url";
 
     // add them all into the tool data
@@ -45,6 +46,7 @@ const create_tool = () => {
     tool_img.classList = "tool-img";
     let image = document.createElement("img");
     image.src = browser.runtime.getURL('icons/dummy.svg');
+    image.classList = "tool-img-content";
     image.id = "image";
 
     // put image into 2nd container
@@ -89,11 +91,12 @@ const place_tool = (x, y) => {
         }
     }
     // for Y co-ordinate
-    if (H - y >= tool_h) {
-        tt_y = y;
+    let yoff = 10; //so that there would be some space to click the link  
+    if (H - y - yoff >= tool_h) {
+        tt_y = y + yoff;
     } else {
-        if (y >= tool_h) {
-            tt_y = y - tool_h;
+        if (y >= tool_h + yoff) {
+            tt_y = y - tool_h - yoff;
         } else {
             tt_y = 0;
         }
@@ -119,12 +122,13 @@ const show = (e) => {
         get_data(url);
 
     } else {
-        let reg = new RegExp("tooltip");
+        let reg = new RegExp("tool-");
         let condition = reg.test(e.target.classList.toString());
         if (!condition) {
             tool.style.visibility = "hidden";
+        } else {
+            tool.style.visibility = "visible";
         }
-
     }
 }
 
