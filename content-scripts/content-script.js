@@ -1,5 +1,5 @@
 // check if the extension works
-console.log("Link previewer successfully!");
+console.log("Link previewer successfully added!");
 
 // global variables
 let H = window.innerHeight;
