@@ -53,7 +53,7 @@ const get_data = async (url) => {
 
     // place tool before loading
     // show not found while loading
-    document.getElementById("image").src = "https://raw.githubusercontent.com/jhamadhav/link-preview/master/public/images/dummy.svg";
+    document.getElementById("image").src = browser.runtime.getURL('icons/dummy.svg');
     place_tool(x, y);
 
     // if it already exists then don't send request to the server

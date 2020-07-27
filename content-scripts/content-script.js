@@ -44,7 +44,7 @@ const create_tool = () => {
     let tool_img = document.createElement("div");
     tool_img.classList = "tool-img";
     let image = document.createElement("img");
-    image.src = "https://raw.githubusercontent.com/jhamadhav/link-preview/master/public/images/dummy.svg";
+    image.src = browser.runtime.getURL('icons/dummy.svg');
     image.id = "image";
 
     // put image into 2nd container
@@ -62,7 +62,7 @@ const create_tool = () => {
 create_tool();
 
 // function to place tooltip
-const place_tool = (x, y, yoff = 10) => {
+const place_tool = (x, y) => {
 
     //get the tool tip
     let tt = document.getElementsByClassName("tooltip")[0];
@@ -89,18 +89,15 @@ const place_tool = (x, y, yoff = 10) => {
         }
     }
     // for Y co-ordinate
-    if (H - y - yoff >= tool_h) {
-        tt_y = y - yoff;
+    if (H - y >= tool_h) {
+        tt_y = y;
     } else {
-        if (y + yoff >= tool_h) {
-            tt_y = y - tool_h + yoff;
+        if (y >= tool_h) {
+            tt_y = y - tool_h;
         } else {
             tt_y = 0;
         }
     }
-    // tool_shape.x = tt_x;
-    // tool_shape.y = tt_y
-    // tt.style.transform = `translate(${tt_x}px,${tt_y}px);`;
     tt.style.left = `${tt_x}px`;
     tt.style.top = `${tt_y}px`;
 }
@@ -118,13 +115,16 @@ const show = (e) => {
 
     if (url !== undefined) {
         // console.log("url");
-        tool.style.transform = "scale(1)";
+        tool.style.visibility = "visible";
         get_data(url);
 
     } else {
-        console.log(e.target.classList.toString());
-        // tool.style.opacity = "0";
-        // place_tool(x, y);
+        let reg = new RegExp("tooltip");
+        let condition = reg.test(e.target.classList.toString());
+        if (!condition) {
+            tool.style.visibility = "hidden";
+        }
+
     }
 }
 
