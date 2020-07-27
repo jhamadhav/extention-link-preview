@@ -96,28 +96,64 @@ const show_preview = async (data) => {
     let image = document.getElementById("image");
 
     // set property only if the data we received is not undefined
+
+    // setup title
     if (obj["title"] !== undefined) {
         title.innerText = obj["title"];
     } else {
         title.innerText = "Title";
     }
 
-    if (obj["description"] !== undefined) {
+    // the description
+    obj["description"].trim();
+    if (obj["description"] !== undefined && obj["description"].length > 10) {
         description.innerText = obj["description"];
     } else {
         description.innerText = "Description : not found";
     }
 
-    if (obj["image"] !== undefined) {
-        image.src = obj["image"];
-    } else {
-        image.src = "https://raw.githubusercontent.com/jhamadhav/link-preview/master/public/images/dummy.svg";
+    // create a new image for the image and assign only when loaded
+    let new_img = new Image();
+    new_img.onload = () => {
+        // get the tooltip
+        let tt = document.getElementsByClassName("tooltip")[0];
+
+        // move the position of image and data as per the image size
+        if (new_img.height < new_img.width) {
+            tt.style.flexDirection = "column-reverse";
+            tt.style.maxWidth = "300px";
+        } else {
+            tt.style.flexDirection = "initial";
+            tt.style.maxWidth = "440px";
+        }
+        // assign the url
+        image.src = new_img.src;
+
+        // place after loading
+        place_tool(x, y);
     }
 
+    // check if url is correct
+    let tool_img = document.getElementsByClassName("tool-img")[0];
+    if (obj["image"] !== undefined) {
+        // console.log(obj["image"]);
+        tool_img.style.display = "block";
+        new_img.src = obj["image"];
+    } else {
+        // console.log("image not found");
+        tool_img.style.display = "none";
+    }
+
+    // assign url to the whole tooltip too
     url.innerText = obj["url"];
 
-    // place after loading
-    place_tool(x, y);
+    let tool_tip = document.getElementsByClassName("tooltip")[0];
+    if (obj["url"] !== undefined) {
+        tool_tip.addEventListener("click", () => {
+            document.location = url;
+        });
+    }
+
 
 }
 

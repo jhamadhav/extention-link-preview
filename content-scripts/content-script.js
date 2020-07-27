@@ -122,8 +122,9 @@ const show = (e) => {
         get_data(url);
 
     } else {
-        tool.style.opacity = "0";
-        place_tool(x, y);
+        console.log(e.target.classList.toString());
+        // tool.style.opacity = "0";
+        // place_tool(x, y);
     }
 }
 
