@@ -6,19 +6,19 @@
     }
 }
 
-@media (prefers-color-scheme: dark) {
-    .tooltip {
-        color: white;
-        background-color: #262626;
-    }
-}
+// @media (prefers-color-scheme: dark) {
+//     .tooltip {
+//         color: white;
+//         background-color: #262626;
+//     }
+// }
 
-@media (prefers-color-scheme: light) {
-    .tooltip {
-        color: black;
-        background-color: white;
-    }
-}
+// @media (prefers-color-scheme: light) {
+    //     .tooltip {
+    //         color: black;
+    //         background-color: white;
+    //     }
+    // }
 
 .tooltip {
     display: flex;
@@ -34,9 +34,12 @@
     font-family: 'Poppins', sans-serif;
     transition-duration: 100ms;
     z-index: 999;
+    opacity: 1;
     visibility: hidden;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     text-overflow: "...";
+    color: black;
+    background-color: white;
 
     @include small {
         flex-direction: column-reverse;
