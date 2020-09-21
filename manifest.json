@@ -15,18 +15,6 @@
         "webRequest",
         "storage"
     ],
-    "browser_action": {
-        "default_icon": "icons/link-32.png",
-        "theme_icons": [
-            {
-                "light": "icons/link-32.png",
-                "dark": "icons/link-32.png",
-                "size": 32
-            }
-        ],
-        "default_title": "Link preview",
-        "default_popup": "popup/choose_anchor.html"
-    },
     "content_scripts": [
         {
             "matches": [
